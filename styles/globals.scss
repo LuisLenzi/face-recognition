@@ -1,0 +1,97 @@
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+
+    @media (max-width: 768px) {
+      width: 2.5px;
+      height: 2.5px;
+    }
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--white-solid);
+
+    &:hover {
+      background: var(--light-white-solid);
+    }
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--gray-solid);
+  }
+}
+
+:root {
+  //Solid Colors
+  --gray-solid: #1a1a1f;
+  --white-solid: #ffffff;
+  --black-solid: #000000;
+  --light-white-solid: #f5f5f5;
+}
+
+@media (max-width: 1080px) {
+  html {
+    font-size: 93.75%;
+  }
+}
+
+@media (max-width: 720px) {
+  html {
+    font-size: 87.5%;
+  }
+}
+
+body,
+input,
+textarea,
+button,
+select,
+option {
+  font: 500 1rem Rubik, sans-serif;
+  color: var(--white-solid);
+}
+
+p,
+span,
+label {
+  letter-spacing: -0.15px;
+  font: 400 1rem Rubik, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 400;
+  font-family: Rubik, sans-serif;
+  color: var(--white-solid);
+}
+
+h1 {
+  letter-spacing: -0.5px;
+  font-size: 2rem;
+}
+
+h2 {
+  letter-spacing: -0.25px;
+  font-size: 1.5rem;
+}
+
+button {
+  outline: none;
+  border: none;
+}
+
+a {
+  outline: none;
+  border: none;
+}
