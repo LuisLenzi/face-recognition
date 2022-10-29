@@ -5,7 +5,7 @@ interface ButtonProps {
   name: string;
   children: ReactNode;
   onClick?: () => void;
-  style: CSSProperties;
+  style?: CSSProperties;
   type: "button" | "submit" | "reset";
 }
 
