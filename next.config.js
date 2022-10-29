@@ -2,6 +2,9 @@
 const nextConfig = {
   swcMinify: true,
   reactStrictMode: true,
+  images: {
+    domains: ['tailwindui.com'],
+  },
 
   webpack: (config, { isServer }) => {
     if (!isServer) {

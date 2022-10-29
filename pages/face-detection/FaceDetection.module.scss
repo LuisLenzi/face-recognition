@@ -1,0 +1,44 @@
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 2rem;
+
+  .titles {
+    padding: 1rem 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.25rem;
+
+    .subtitle {
+      text-align: left;
+      font-size: 1rem;
+      line-height: 1rem;
+      font-weight: 400;
+      color: var(--gray-100);
+    }
+
+    .title {
+      text-align: left;
+      font-size: 2.5rem;
+      line-height: 2.5rem;
+      letter-spacing: -2.5px;
+      font-weight: 700;
+      color: var(--gray-100);
+    }
+  }
+
+  .content {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+}

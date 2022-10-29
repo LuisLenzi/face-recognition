@@ -1,0 +1,17 @@
+.container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: url("/assets/elipse.png") no-repeat center;
+  background-size: cover;
+  background-color: var(--gray-700);
+
+  .content {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

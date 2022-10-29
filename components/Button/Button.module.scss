@@ -1,15 +1,23 @@
 .button {
-  background: var(--white-solid);
-  color: var(--gray-solid);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--moss-green);
+  color: var(--gray-100);
   border: none;
+  gap: 1rem;
   border-radius: 0.5rem;
-  padding: 0.5rem 1rem;
+  padding: 1rem;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
+  letter-spacing: -0.15px;
   cursor: pointer;
-  transition: filter 0.2s;
+  transition: all 0.2s ease-in-out;
+  width: max-content;
+  border: 2px solid var(--moss-green);
 
   &:hover {
-    filter: brightness(0.9);
+    border: 2px solid var(--gray-100);
+    filter: brightness(0.85);
   }
 }

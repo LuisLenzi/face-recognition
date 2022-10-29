@@ -18,23 +18,30 @@ export default class MyDocument extends Document {
             name="keywords"
             content="face, recognition, app, nextjs, react, typescript, face-api.js"
           />
-          <meta property="title" content="Face Recognition App" />
-          <meta property="og:title" content="Face Recognition App" />
           <meta property="og:locale" content="pt_br" />
           <meta property="og:type" content="website" />
           <meta name="theme-color" content="#FFFFFF" />
+          <meta property="title" content="Face Recognition App" />
+          <meta property="og:title" content="Face Recognition App" />
           <meta property="og:site_name" content="Face Recognition App" />
           <meta
             property="og:url"
-            content="https://face-recognition.vercel.app"
+            content="https://face-recognition-woad.vercel.app"
           />
           <meta
             property="og:url"
-            content="https://face-recognition.vercel.app"
+            content="https://face-recognition-woad.vercel.app"
           />
-          <meta property="url" content="https://face-recognition.vercel.app" />
-          <meta property="url" content="https://face-recognition.vercel.app" />
+          <meta
+            property="url"
+            content="https://face-recognition-woad.vercel.app"
+          />
+          <meta
+            property="url"
+            content="https://face-recognition-woad.vercel.app"
+          />
           <meta property="image" content="/favicon.svg" />
+
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link
             href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
