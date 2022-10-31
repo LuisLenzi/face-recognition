@@ -12,9 +12,9 @@ export default function Dashboard() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Face Recognition</title>
+        <title>{TITLE}</title>
         <link rel="icon" href="/favicon.ico" />
-        <meta name="description" content="Face Recognition" />
+        <meta name="description" content={SUBTITLE} />
       </Head>
 
       <div className={styles.titles}>

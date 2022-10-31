@@ -2,21 +2,21 @@ import Head from "next/head";
 
 import styles from "./ImageDetection.module.scss";
 
-const TITLE = "Image Detection";
+const TITLE = "Detecção de Imagens";
 const SUBTITLE = "Reconhecimento de Imagens";
 
 export default function ImageDetection() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Face Detection</title>
+        <title>{TITLE}</title>
         <link rel="icon" href="/favicon.ico" />
-        <meta name="description" content="Face Detection" />
+        <meta name="description" content={SUBTITLE} />
       </Head>
 
       <div className={styles.titles}>
-        <h1 className={styles.title}>{TITLE}</h1>
         <p className={styles.subtitle}>{SUBTITLE}</p>
+        <h1 className={styles.title}>{TITLE}</h1>
       </div>
 
       <div className={styles.content}></div>
