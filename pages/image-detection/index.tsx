@@ -1,13 +1,11 @@
 import Head from "next/head";
 
-import Video from "../../components/Video";
+import styles from "./ImageDetection.module.scss";
 
-import styles from "./FaceDetection.module.scss";
+const TITLE = "Image Detection";
+const SUBTITLE = "Reconhecimento de Imagens";
 
-const TITLE = "Face Detection";
-const SUBTITLE = "Reconhecimento de Expressões Faciais";
-
-export default function FaceDetection() {
+export default function ImageDetection() {
   return (
     <div className={styles.container}>
       <Head>
@@ -21,9 +19,7 @@ export default function FaceDetection() {
         <p className={styles.subtitle}>{SUBTITLE}</p>
       </div>
 
-      <div className={styles.content}>
-        <Video />
-      </div>
+      <div className={styles.content}></div>
     </div>
   );
 }

@@ -4,8 +4,6 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background: var(--gray-600);
-  border-radius: 10px;
   position: relative;
 
   .content {
@@ -15,11 +13,92 @@
     justify-content: center;
 
     .card {
+      background: var(--gray-600);
+      border-radius: 10px;
+      border: 1px solid var(--gray-500);
+
       width: 100%;
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
+      object-fit: cover;
       position: relative;
+
+      .video {
+        width: 100%;
+        object-fit: cover;
+        max-height: 700px;
+      }
+
+      .canvas {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        max-height: 700px;
+        position: absolute;
+      }
+    }
+
+    .expressions {
+      gap: 0.5rem;
+      position: absolute;
+      bottom: 2rem;
+      right: 2rem;
+
+      @media (max-width: 768px) {
+        bottom: auto;
+        top: 1rem;
+        left: 1rem;
+      }
+
+      .expression {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--gray-700);
+        padding: 0.75rem 1rem;
+        background: var(--gray-100);
+        letter-spacing: -0.05rem;
+        font-weight: 500;
+        border-radius: 2rem;
+        font-size: 1rem;
+        z-index: 2;
+        cursor: default;
+
+        border: 1px solid var(--gray-300);
+      }
+
+      .acuracy {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--gray-700);
+        padding: 0.75rem 1rem;
+        background: var(--gray-100);
+        letter-spacing: -0.05rem;
+        font-weight: 500;
+        border-radius: 2rem;
+        font-size: 1rem;
+        z-index: 2;
+        cursor: default;
+
+        border: 1px solid var(--gray-300);
+      }
+
+      .emoji {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--gray-100);
+        padding: 0.5rem;
+        background: var(--moss-green);
+        border-radius: 2rem;
+        z-index: 2;
+        cursor: default;
+
+        border: 1px solid var(--swamp-green);
+      }
     }
   }
 }

@@ -25,36 +25,40 @@ export default function Dashboard() {
       <div className={styles.content}>
         <div className={styles.images}>
           <Image
-            src="/assets/luis.png"
-            alt="Luis Lenzi"
+            src="/assets/1.png"
+            alt="Face Detection 1"
             width={250}
             height={375}
-            className={styles.image}
+            className={styles.image1}
+            quality={50}
           />
         </div>
         <div className={styles.images}>
           <Image
-            src="/assets/victor.png"
-            alt="Victor Bento"
+            src="/assets/2.png"
+            alt="Face Detection 2"
             width={250}
             height={375}
-            className={styles.image}
+            className={styles.image2}
+            quality={50}
           />
           <Image
-            src="/assets/hugo.png"
-            alt="Hugo Massote"
+            src="/assets/3.png"
+            alt="Face Detection 3"
             width={250}
             height={375}
-            className={styles.image}
+            className={styles.image3}
+            quality={50}
           />
         </div>
         <div className={styles.images}>
           <Image
-            src="/assets/guilherme.png"
-            alt="Guilherme Cruz"
+            src="/assets/4.png"
+            alt="Face Detection 4"
             width={250}
             height={375}
-            className={styles.image}
+            className={styles.image4}
+            quality={50}
           />
         </div>
       </div>

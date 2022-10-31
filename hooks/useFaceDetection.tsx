@@ -80,7 +80,8 @@ export const useFaceDetection = () => {
       const detections = await faceapi
         .detectAllFaces(video, new faceapi.SsdMobilenetv1Options())
         .withFaceLandmarks()
-        .withFaceExpressions();
+        .withFaceExpressions()
+        .withFaceDescriptors();
 
       const resizedDetections = faceapi.resizeResults(detections, displaySize);
 

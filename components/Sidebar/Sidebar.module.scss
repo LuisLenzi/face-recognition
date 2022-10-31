@@ -2,8 +2,58 @@
   padding: 2rem;
   display: flex;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: space-between;
   flex-direction: column;
   gap: 1rem;
   height: 100vh;
+  border-right: 1px solid var(--gray-500);
+  background: url("/assets/elipse.png") no-repeat center;
+  background-color: var(--gray-700-opacity-50);
+
+  @media (max-width: 768px) {
+    padding: 1rem 2rem;
+    height: auto;
+    flex-direction: row;
+    width: 100% !important;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .sidebarLogo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .buttons {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+
+    .buttonName {
+      color: var(--gray-100);
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: -0.15px;
+      display: flex;
+
+      @media (max-width: 768px) {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      padding: 1rem;
+      height: auto;
+      flex-direction: row;
+    }
+  }
+
+  .hide {
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
 }

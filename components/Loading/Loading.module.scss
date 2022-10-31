@@ -19,6 +19,7 @@
   background-color: var(--gray-700-opacity-50);
   left: 0;
   gap: 1rem;
+  z-index: 9999;
 
   p {
     color: var(--gray-100);

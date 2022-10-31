@@ -1,14 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useCallback, useEffect, useState } from "react";
+
+import { useCallback, useEffect, useState, useContext } from "react";
+
+import { FiAlertTriangle, FiCamera, FiCameraOff } from "react-icons/fi";
 import { BiAngry, BiHappy, BiSad } from "react-icons/bi";
 import { FaRegDizzy, FaRegSurprise } from "react-icons/fa";
-
-import { FiCamera, FiCameraOff } from "react-icons/fi";
 import { MdOutlineSentimentNeutral } from "react-icons/md";
 
+import { Context } from "../../context";
 import { useFaceDetection } from "../../hooks/useFaceDetection";
 
 import Button from "../Button";
+import { Tooltips } from "../Tooltip";
 
 import styles from "./Video.module.scss";
 
@@ -22,6 +25,8 @@ export default function Video() {
     faceExpression,
   } = useFaceDetection();
 
+  const { handleLoading } = useContext(Context);
+
   const [isVideoOn, setIsVideoOn] = useState(false);
 
   useEffect(() => {
@@ -31,7 +36,7 @@ export default function Video() {
   useEffect(() => {
     const interval = setInterval(() => {
       detect();
-    }, 100);
+    }, 150);
 
     return () => clearInterval(interval);
   }, [detect]);
@@ -40,13 +45,15 @@ export default function Video() {
     setIsVideoOn(!isVideoOn);
 
     if (!isVideoOn) {
+      handleLoading(true);
       await startVideo();
+      handleLoading(false);
     }
 
     if (isVideoOn && videoRef.current) {
       videoRef.current.srcObject = null;
     }
-  }, [isVideoOn, startVideo, videoRef]);
+  }, [handleLoading, isVideoOn, startVideo, videoRef]);
 
   const getEmojiExpression = useCallback(() => {
     if (faceExpression) {
@@ -93,24 +100,33 @@ export default function Video() {
               <FiCameraOff size={50} />
               Ative sua câmera para começar a usar
               <br /> a ferramenta de reconhecimento
+              <p
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "0.5rem",
+                  color: "var(--gray-300)",
+                }}
+              >
+                <FiAlertTriangle /> É importante que bloqueadores estejam
+                desabilitados
+              </p>
             </h3>
           )}
           <canvas
-            width={850}
-            height={700}
             ref={canvasRef}
+            className={styles.canvas}
             style={{
               zIndex: 1,
-              position: "absolute",
-              borderRadius: "15px",
             }}
           />
 
           <video
             muted
             autoPlay
-            width={850}
-            height={700}
+            width={975}
+            height={825}
             ref={videoRef}
             onPlay={detect}
             className={styles.video}
@@ -125,49 +141,19 @@ export default function Video() {
           className={styles.expressions}
           style={{
             display: isVideoOn ? "flex" : "none",
-            gap: ".5rem",
-            position: "absolute",
-            bottom: "2rem",
-            right: "2rem",
           }}
         >
-          <h3
-            style={{
-              color: "var(--gray-700)",
-              padding: "0.75rem 1rem",
-              background: "var(--gray-100)",
-              letterSpacing: "-0.05rem",
-              fontWeight: 500,
-              borderRadius: "2rem",
-              fontSize: "1rem",
-            }}
-          >
-            {faceExpression?.key || "Sem expressão"}
-          </h3>
-          <h3
-            style={{
-              color: "var(--gray-700)",
-              padding: "0.75rem 1rem",
-              background: "var(--gray-100)",
-              letterSpacing: "-0.05rem",
-              fontWeight: 500,
-              borderRadius: "2rem",
-              fontSize: "1rem",
-            }}
-          >
-            {faceExpression?.value.toFixed(2) || 0}%
-          </h3>
-          <h3
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              color: "var(--gray-100)",
-              padding: "0.5rem",
-              background: "var(--moss-green)",
-              borderRadius: "2rem",
-            }}
-          >
+          <Tooltips title={"Expressão"} placement="top">
+            <h3 className={styles.expression}>
+              {faceExpression?.key || "Sem expressão"}
+            </h3>
+          </Tooltips>
+          <Tooltips title={"Acurácia"} placement="top">
+            <h3 className={styles.acuracy}>
+              {faceExpression?.value.toFixed(2) || 0}%
+            </h3>
+          </Tooltips>
+          <h3 className={styles.emoji}>
             {getEmojiExpression() || <MdOutlineSentimentNeutral size={25} />}
           </h3>
         </div>
@@ -180,6 +166,7 @@ export default function Video() {
             position: "absolute",
             bottom: "2rem",
             left: "2rem",
+            zIndex: 2,
           }}
         >
           {isVideoOn ? (
