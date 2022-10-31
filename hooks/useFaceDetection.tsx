@@ -2,7 +2,7 @@ import { useCallback, useContext, useRef, useState } from "react";
 
 import * as faceapi from "face-api.js";
 
-import { FaceExpressions } from "face-api.js";
+import { FaceExpressions, IBoundingBox, IRect } from "face-api.js";
 
 import { Context } from "../context";
 
@@ -80,16 +80,13 @@ export const useFaceDetection = () => {
       const detections = await faceapi
         .detectAllFaces(video, new faceapi.SsdMobilenetv1Options())
         .withFaceLandmarks()
-        .withFaceExpressions()
-        .withFaceDescriptors();
+        .withFaceExpressions();
 
       const resizedDetections = faceapi.resizeResults(detections, displaySize);
 
       canvas.getContext("2d")?.clearRect(0, 0, canvas.width, canvas.height);
 
-      faceapi.draw.drawDetections(canvas, resizedDetections);
       faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
-      faceapi.draw.drawFaceExpressions(canvas, resizedDetections);
 
       handleGetExpression(resizedDetections[0]?.expressions as FaceExpressions);
     }

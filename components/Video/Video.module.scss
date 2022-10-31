@@ -29,6 +29,12 @@
         width: 100%;
         object-fit: cover;
         max-height: 700px;
+        z-index: 0;
+        border-radius: 15px;
+
+        transform: rotateY(180deg);
+        -webkit-transform: rotateY(180deg);
+        -moz-transform: rotateY(180deg);
       }
 
       .canvas {
@@ -37,6 +43,11 @@
         object-fit: cover;
         max-height: 700px;
         position: absolute;
+        z-index: 1;
+
+        transform: rotateY(180deg);
+        -webkit-transform: rotateY(180deg);
+        -moz-transform: rotateY(180deg);
       }
     }
 

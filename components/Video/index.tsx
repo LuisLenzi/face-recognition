@@ -107,33 +107,24 @@ export default function Video() {
                   justifyContent: "center",
                   gap: "0.5rem",
                   color: "var(--gray-300)",
+                  fontSize: "0.95rem",
+                  maxWidth: "500px",
                 }}
               >
-                <FiAlertTriangle /> É importante que bloqueadores estejam
-                desabilitados
+                <FiAlertTriangle /> A câmera só será ativada quando você clicar
               </p>
             </h3>
           )}
-          <canvas
-            ref={canvasRef}
-            className={styles.canvas}
-            style={{
-              zIndex: 1,
-            }}
-          />
+          <canvas ref={canvasRef} className={styles.canvas} />
 
           <video
             muted
             autoPlay
-            width={975}
-            height={825}
+            width={900}
+            height={700}
             ref={videoRef}
             onPlay={detect}
             className={styles.video}
-            style={{
-              zIndex: 0,
-              borderRadius: "15px",
-            }}
           />
         </div>
 
