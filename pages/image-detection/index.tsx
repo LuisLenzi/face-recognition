@@ -3,8 +3,8 @@ import ImageComponent from "../../components/Image";
 
 import styles from "./ImageDetection.module.scss";
 
-const TITLE = "Detecção de Imagens";
-const SUBTITLE = "Reconhecimento de Imagens";
+const TITLE = "Detecção por Imagens";
+const SUBTITLE = "Reconhecimento Facial por Imagens";
 
 export default function ImageDetection() {
   return (

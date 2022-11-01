@@ -135,8 +135,8 @@ export default function Autors() {
         {autors.map((autor) => (
           <div className={styles.autor} key={autor.id}>
             <Image
-              width={250}
-              height={375}
+              width={275}
+              height={400}
               quality={100}
               alt={autor.name}
               src={autor.image}

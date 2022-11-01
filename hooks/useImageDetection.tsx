@@ -115,22 +115,22 @@ export const useImageDetection = () => {
       faceapi.matchDimensions(canvasRef4, displaySize4);
 
       const detection1 = await faceapi
-        .detectAllFaces(imageRef1, new faceapi.SsdMobilenetv1Options())
+        .detectAllFaces(imageRef1, options)
         .withFaceLandmarks()
         .withFaceExpressions();
 
       const detection2 = await faceapi
-        .detectAllFaces(imageRef2, new faceapi.SsdMobilenetv1Options())
+        .detectAllFaces(imageRef2, options)
         .withFaceLandmarks()
         .withFaceExpressions();
 
       const detection3 = await faceapi
-        .detectAllFaces(imageRef3, new faceapi.SsdMobilenetv1Options())
+        .detectAllFaces(imageRef3, options)
         .withFaceLandmarks()
         .withFaceExpressions();
 
       const detection4 = await faceapi
-        .detectAllFaces(imageRef4, new faceapi.SsdMobilenetv1Options())
+        .detectAllFaces(imageRef4, options)
         .withFaceLandmarks()
         .withFaceExpressions();
 
@@ -226,6 +226,11 @@ export const useImageDetection = () => {
       drawBox3.draw(canvasRef3);
       drawBox4.draw(canvasRef4);
 
+      faceapi.draw.drawFaceExpressions(canvasRef1, resizedPerson1 as any);
+      faceapi.draw.drawFaceExpressions(canvasRef2, resizedPerson2 as any);
+      faceapi.draw.drawFaceExpressions(canvasRef3, resizedPerson3 as any);
+      faceapi.draw.drawFaceExpressions(canvasRef4, resizedPerson4 as any);
+
       handleGetExpression([
         faceExpressions1 as FaceExpressions,
         faceExpressions2 as FaceExpressions,
@@ -241,10 +246,12 @@ export const useImageDetection = () => {
 
     const MODEL_URL = "/models";
 
-    await faceapi.loadSsdMobilenetv1Model(MODEL_URL);
-    await faceapi.loadFaceLandmarkModel(MODEL_URL);
-    await faceapi.loadFaceRecognitionModel(MODEL_URL);
-    await faceapi.loadFaceExpressionModel(MODEL_URL);
+    await faceapi.nets.ssdMobilenetv1.loadFromUri(MODEL_URL);
+    await faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL);
+    await faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL);
+    await faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL);
+    await faceapi.nets.faceExpressionNet.loadFromUri(MODEL_URL);
+    await faceapi.nets.ageGenderNet.loadFromUri(MODEL_URL);
 
     handleLoading(false);
   }, [handleLoading]);

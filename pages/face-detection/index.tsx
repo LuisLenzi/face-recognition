@@ -1,11 +1,11 @@
 import Head from "next/head";
 
-import VideoComponent from "../../components/Video";
+import VideoComponent from "../../components/Camera";
 
 import styles from "./FaceDetection.module.scss";
 
-const TITLE = "Detecção de Faces";
-const SUBTITLE = "Reconhecimento de Expressões Faciais";
+const TITLE = "Detecção pela Câmera";
+const SUBTITLE = "Reconhecimento Facial pela Câmera";
 
 export default function FaceDetection() {
   return (

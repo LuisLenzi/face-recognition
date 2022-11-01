@@ -1,68 +1,35 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import { useCallback, useEffect, useState, useContext } from "react";
+import { useCallback, useEffect } from "react";
 
-import { FiAlertTriangle, FiCamera, FiCameraOff } from "react-icons/fi";
 import { BiAngry, BiHappy, BiSad } from "react-icons/bi";
 import { FaRegDizzy, FaRegSurprise } from "react-icons/fa";
 import { MdOutlineSentimentNeutral } from "react-icons/md";
 
-import { Context } from "../../context";
-import { useCamDetection } from "../../hooks/useCamDetection";
-
-import Button from "../Button";
-import { Tooltips } from "../Tooltip";
+import { useVideoDetection } from "../../hooks/useVideoDetection";
 
 import styles from "./Video.module.scss";
 
 export default function VideoComponent() {
-  const {
-    detect,
-    videoRef,
-    canvasRef,
-    loadModels,
-    startVideo,
-    faceExpression,
-  } = useCamDetection();
+  const { detect, videoRef, canvasRef, loadModels, faceExpression } =
+    useVideoDetection();
 
-  const { handleLoading } = useContext(Context);
-
-  const [isVideoOn, setIsVideoOn] = useState(false);
+  const handleLoadModels = useCallback(async () => {
+    await loadModels();
+  }, [loadModels]);
 
   useEffect(() => {
-    loadModels();
-  }, []);
+    handleLoadModels();
+  }, [detect]);
 
   useEffect(() => {
     const interval = setInterval(() => {
       detect();
-    }, 150);
+    }, 100);
 
     return () => clearInterval(interval);
   }, [detect]);
-
-  const handleVideo = useCallback(async () => {
-    setIsVideoOn(!isVideoOn);
-
-    if (!isVideoOn) {
-      handleLoading(true);
-      await startVideo();
-      handleLoading(false);
-    }
-
-    if (isVideoOn && videoRef.current) {
-      videoRef.current.pause();
-
-      const stream = videoRef.current.srcObject as MediaStream;
-      const tracks = stream.getTracks();
-
-      tracks.forEach((track) => {
-        track.stop();
-      });
-
-      videoRef.current.srcObject = null;
-    }
-  }, [handleLoading, isVideoOn, startVideo, videoRef]);
 
   const getEmojiExpression = useCallback(() => {
     if (faceExpression) {
@@ -93,112 +60,20 @@ export default function VideoComponent() {
     <section className={styles.container}>
       <div className={styles.content}>
         <div className={styles.card}>
-          {!isVideoOn && (
-            <h3
-              style={{
-                padding: isVideoOn ? "0" : "2rem",
-                position: "absolute",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                flexDirection: "column",
-                color: "var(--gray-100)",
-                maxWidth: "400px",
-                gap: "1rem",
-                textAlign: "center",
-              }}
-            >
-              <FiCameraOff size={50} />
-              Ative sua câmera para começar a usar a ferramenta de
-              reconhecimento
-              <p
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  gap: "0.5rem",
-                  color: "var(--gray-300)",
-                  fontSize: "0.95rem",
-                  maxWidth: "500px",
-                }}
-              >
-                <FiAlertTriangle /> A câmera só será ativada quando você clicar
-              </p>
-            </h3>
-          )}
           <canvas ref={canvasRef} className={styles.canvas} />
 
           <video
-            muted
+            src="/assets/video.mp4"
             autoPlay
-            width={900}
-            height={775}
+            muted
+            loop
+            playsInline
+            width={700}
+            height={375}
             ref={videoRef}
-            onPlay={detect}
-            className={styles.video}
+            className={styles.gif}
           />
         </div>
-
-        <div
-          className={styles.expressions}
-          style={{
-            display: isVideoOn ? "flex" : "none",
-          }}
-        >
-          <Tooltips title={"Expressão"} placement="top">
-            <h3 className={styles.expression}>
-              {faceExpression?.key || "Sem expressão"}
-            </h3>
-          </Tooltips>
-          <Tooltips title={"Acurácia"} placement="top">
-            <h3 className={styles.acuracy}>
-              {(faceExpression && (faceExpression?.value * 100).toFixed(2)) ||
-                0}
-              %
-            </h3>
-          </Tooltips>
-          <h3 className={styles.emoji}>
-            {getEmojiExpression() || <MdOutlineSentimentNeutral size={25} />}
-          </h3>
-        </div>
-
-        <Button
-          type="button"
-          onClick={handleVideo}
-          name="start-video-button"
-          style={{
-            position: "absolute",
-            bottom: "2rem",
-            left: "2rem",
-            zIndex: 2,
-          }}
-        >
-          {isVideoOn ? (
-            <p
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontWeight: 500,
-                gap: "1rem",
-              }}
-            >
-              <FiCameraOff size={18} /> Desativar câmera
-            </p>
-          ) : (
-            <p
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontWeight: 500,
-                gap: "1rem",
-              }}
-            >
-              <FiCamera size={18} /> Ativar câmera
-            </p>
-          )}
-        </Button>
       </div>
     </section>
   );

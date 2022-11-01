@@ -9,7 +9,7 @@ import { Tooltips } from "../Tooltip";
 import styles from "./Sidebar.module.scss";
 
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import { FiCamera, FiHome, FiImage } from "react-icons/fi";
+import { FiCamera, FiHome, FiImage, FiVideo } from "react-icons/fi";
 import { BiCopyright } from "react-icons/bi";
 import { useRouter } from "next/router";
 
@@ -27,14 +27,19 @@ export default function Sidebar() {
       icon: <FiHome size={18} />,
     },
     {
-      name: "Detecção de Faces",
+      name: "Detecção pela Câmera",
       path: "/face-detection",
       icon: <FiCamera size={18} />,
     },
     {
-      name: "Detecção de Imagens",
+      name: "Detecção por Imagens",
       path: "/image-detection",
       icon: <FiImage size={18} />,
+    },
+    {
+      name: "Detecção por Vídeos",
+      path: "/video-detection",
+      icon: <FiVideo size={18} />,
     },
     {
       name: "Autores",

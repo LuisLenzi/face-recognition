@@ -12,7 +12,7 @@ export interface FaceExpressionProps {
 }
 
 export const useCamDetection = () => {
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const cameraRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const { handleLoading } = useContext(Context);
@@ -24,21 +24,21 @@ export const useCamDetection = () => {
 
     const MODEL_URL = "/models";
 
-    await faceapi.loadSsdMobilenetv1Model(MODEL_URL);
-    await faceapi.loadFaceLandmarkModel(MODEL_URL);
-    await faceapi.loadFaceRecognitionModel(MODEL_URL);
-    await faceapi.loadFaceExpressionModel(MODEL_URL);
+    await faceapi.nets.ssdMobilenetv1.loadFromUri(MODEL_URL);
+    await faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL);
+    await faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL);
+    await faceapi.nets.faceExpressionNet.loadFromUri(MODEL_URL);
 
     handleLoading(false);
   }, [handleLoading]);
 
-  const startVideo = useCallback(async () => {
+  const startCamera = useCallback(async () => {
     const stream = await navigator.mediaDevices.getUserMedia({
       video: {},
     });
 
-    if (videoRef.current) {
-      videoRef.current.srcObject = stream;
+    if (cameraRef.current) {
+      cameraRef.current.srcObject = stream;
     }
   }, []);
 
@@ -69,16 +69,16 @@ export const useCamDetection = () => {
   );
 
   const detect = useCallback(async () => {
-    if (videoRef.current && canvasRef.current) {
-      const video = videoRef.current;
+    if (cameraRef.current && canvasRef.current) {
+      const camera = cameraRef.current;
       const canvas = canvasRef.current;
 
-      const displaySize = { width: video.width, height: video.height };
+      const displaySize = { width: camera.width, height: camera.height };
 
       faceapi.matchDimensions(canvas, displaySize);
 
       const detections = await faceapi
-        .detectAllFaces(video, new faceapi.SsdMobilenetv1Options())
+        .detectAllFaces(camera, new faceapi.SsdMobilenetv1Options())
         .withFaceLandmarks()
         .withFaceExpressions();
 
@@ -94,10 +94,10 @@ export const useCamDetection = () => {
 
   return {
     detect,
-    videoRef,
+    cameraRef,
     canvasRef,
     loadModels,
-    startVideo,
+    startCamera,
     faceExpression,
   };
 };
