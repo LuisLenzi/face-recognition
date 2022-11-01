@@ -1,19 +1,27 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import { useCallback, useEffect } from "react";
-
-import { BiAngry, BiHappy, BiSad } from "react-icons/bi";
-import { FaRegDizzy, FaRegSurprise } from "react-icons/fa";
-import { MdOutlineSentimentNeutral } from "react-icons/md";
+import { useCallback, useEffect, useRef } from "react";
 
 import { useVideoDetection } from "../../hooks/useVideoDetection";
 
 import styles from "./Video.module.scss";
 
 export default function VideoComponent() {
-  const { detect, videoRef, canvasRef, loadModels, faceExpression } =
-    useVideoDetection();
+  const {
+    detect,
+    videoRef,
+    canvasRef,
+    loadModels,
+    handleGetVideoRefs,
+    handleGetCanvasRefs,
+  } = useVideoDetection();
+
+  const videoRef1 = useRef<HTMLVideoElement>(null);
+  const videoRef2 = useRef<HTMLVideoElement>(null);
+
+  const canvasRef1 = useRef<HTMLCanvasElement>(null);
+  const canvasRef2 = useRef<HTMLCanvasElement>(null);
 
   const handleLoadModels = useCallback(async () => {
     await loadModels();
@@ -21,7 +29,17 @@ export default function VideoComponent() {
 
   useEffect(() => {
     handleLoadModels();
-  }, [detect]);
+
+    handleGetVideoRefs([
+      videoRef1.current as HTMLVideoElement,
+      videoRef2.current as HTMLVideoElement,
+    ]);
+
+    handleGetCanvasRefs([
+      canvasRef1.current as HTMLCanvasElement,
+      canvasRef2.current as HTMLCanvasElement,
+    ]);
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -31,36 +49,26 @@ export default function VideoComponent() {
     return () => clearInterval(interval);
   }, [detect]);
 
-  const getEmojiExpression = useCallback(() => {
-    if (faceExpression) {
-      const { key } = faceExpression;
-
-      switch (key) {
-        case "Triste":
-          return <BiSad size={25} />;
-        case "Bravo":
-          return <BiAngry size={25} />;
-        case "Feliz":
-          return <BiHappy size={25} />;
-        case "Neutro":
-          return <MdOutlineSentimentNeutral size={25} />;
-        case "Com medo":
-          return <FaRegDizzy size={25} />;
-        case "Surpreso":
-          return <FaRegSurprise size={25} />;
-        case "Repugnado":
-          return <FaRegDizzy size={25} />;
-        default:
-          return <MdOutlineSentimentNeutral size={25} />;
-      }
-    }
-  }, [faceExpression]);
-
   return (
     <section className={styles.container}>
       <div className={styles.content}>
         <div className={styles.card}>
-          <canvas ref={canvasRef} className={styles.canvas} />
+          <canvas ref={canvasRef1} className={styles.canvas} />
+
+          <video
+            src="/assets/video2.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            width={750}
+            height={425}
+            ref={videoRef1}
+            className={styles.gif}
+          />
+        </div>
+        <div className={styles.card}>
+          <canvas ref={canvasRef2} className={styles.canvas} />
 
           <video
             src="/assets/video.mp4"
@@ -68,9 +76,9 @@ export default function VideoComponent() {
             muted
             loop
             playsInline
-            width={700}
-            height={375}
-            ref={videoRef}
+            width={750}
+            height={425}
+            ref={videoRef2}
             className={styles.gif}
           />
         </div>
