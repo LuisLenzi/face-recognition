@@ -2,16 +2,16 @@ import { useCallback, useContext, useRef, useState } from "react";
 
 import * as faceapi from "face-api.js";
 
-import { FaceExpressions, IBoundingBox, IRect } from "face-api.js";
+import { FaceExpressions } from "face-api.js";
 
 import { Context } from "../context";
 
-interface FaceExpressionProps {
+export interface FaceExpressionProps {
   key: string;
   value: number;
 }
 
-export const useFaceDetection = () => {
+export const useCamDetection = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 

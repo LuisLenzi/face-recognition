@@ -48,7 +48,7 @@ export default function Sidebar() {
       className={styles.sidebar}
       style={{
         transition: "all 0.3s ease-in-out",
-        width: isSidebarOpen ? "325px" : "130px",
+        width: isSidebarOpen ? "325px" : "125px",
       }}
     >
       <div className={styles.sidebarLogo}>
@@ -70,7 +70,14 @@ export default function Sidebar() {
       </div>
       <div className={styles.buttons}>
         {routes.map((route) => (
-          <Link key={route.name} href={route.path} passHref>
+          <Link
+            key={route.name}
+            href={route.path}
+            passHref
+            style={{
+              width: "100%",
+            }}
+          >
             <Button
               name={route.name}
               type="button"

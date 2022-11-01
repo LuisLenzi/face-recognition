@@ -28,7 +28,7 @@ export default function Autors() {
         },
         {
           id: 2,
-          name: "Portifólio",
+          name: "Portfólio",
           link: "https://luislenzi.dev",
           icon: <FiMonitor size={20} />,
         },
@@ -74,7 +74,7 @@ export default function Autors() {
       socialMedias: [
         {
           id: 1,
-          name: "Portifólio",
+          name: "Portfólio",
           link: "https://hmcelulares.com",
           icon: <FiMonitor size={20} />,
         },
@@ -94,7 +94,7 @@ export default function Autors() {
       socialMedias: [
         {
           id: 1,
-          name: "Portifólio",
+          name: "Portfólio",
           link: "https://victordob.com",
           icon: <FiMonitor size={20} />,
         },
@@ -120,6 +120,10 @@ export default function Autors() {
         <title>{TITLE}</title>
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content={SUBTITLE} />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
       </Head>
 
       <div className={styles.titles}>

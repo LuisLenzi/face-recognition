@@ -1,4 +1,5 @@
 import Head from "next/head";
+import ImageComponent from "../../components/Image";
 
 import styles from "./ImageDetection.module.scss";
 
@@ -12,6 +13,10 @@ export default function ImageDetection() {
         <title>{TITLE}</title>
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content={SUBTITLE} />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
       </Head>
 
       <div className={styles.titles}>
@@ -19,7 +24,9 @@ export default function ImageDetection() {
         <h1 className={styles.title}>{TITLE}</h1>
       </div>
 
-      <div className={styles.content}></div>
+      <div className={styles.content}>
+        <ImageComponent />
+      </div>
     </div>
   );
 }

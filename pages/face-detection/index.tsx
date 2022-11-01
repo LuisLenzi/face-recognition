@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-import Video from "../../components/Video";
+import VideoComponent from "../../components/Video";
 
 import styles from "./FaceDetection.module.scss";
 
@@ -14,6 +14,10 @@ export default function FaceDetection() {
         <title>{TITLE}</title>
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content={SUBTITLE} />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
       </Head>
 
       <div className={styles.titles}>
@@ -22,7 +26,7 @@ export default function FaceDetection() {
       </div>
 
       <div className={styles.content}>
-        <Video />
+        <VideoComponent />
       </div>
     </div>
   );

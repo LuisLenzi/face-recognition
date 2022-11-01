@@ -1,0 +1,148 @@
+.container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  .content {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1.25rem;
+
+    .cards {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 1.25rem;
+
+      @media (max-width: 925px) {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @media (max-width: 768px) {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .card {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        border: 1px solid var(--gray-500);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+
+        .image {
+          width: 100%;
+          height: 100%;
+          object-position: top;
+          object-fit: contain;
+          z-index: 0;
+          border-radius: 15px;
+        }
+
+        .canvas {
+          width: 100%;
+          height: 100%;
+
+          object-position: top;
+          position: absolute;
+          object-fit: cover;
+          z-index: 1;
+        }
+      }
+
+      .expressions {
+        display: flex;
+        gap: 0.5rem;
+        position: absolute;
+        bottom: 1rem;
+        right: 1rem;
+
+        @media (max-width: 1375px) {
+          flex-direction: column;
+          left: .5rem;
+          bottom: .5rem;
+          gap: .25rem;
+          right: auto;
+
+          .expression,
+          .acuracy,
+          .emoji {
+            width: fit-content;
+          }
+
+          .expression {
+            order: 2;
+          }
+
+          .acuracy {
+            order: 1;
+          }
+
+          .emoji {
+            order: 0;
+          }
+        }
+
+        .expression {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: var(--gray-700);
+          padding: 0.75rem 1rem;
+          background: var(--gray-100);
+          letter-spacing: -0.05rem;
+          font-weight: 500;
+          border-radius: 2rem;
+          font-size: 1rem;
+          width: max-content;
+          z-index: 2;
+          cursor: default;
+
+          border: 1px solid var(--gray-300);
+        }
+
+        .acuracy {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: var(--gray-700);
+          padding: 0.75rem 1rem;
+          background: var(--gray-100);
+          letter-spacing: -0.05rem;
+          font-weight: 500;
+          border-radius: 2rem;
+          font-size: 1rem;
+          z-index: 2;
+          cursor: default;
+
+          border: 1px solid var(--gray-300);
+        }
+
+        .emoji {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: var(--gray-100);
+          padding: 0.5rem;
+          background: var(--moss-green);
+          border-radius: 2rem;
+          z-index: 2;
+          cursor: default;
+
+          border: 1px solid var(--swamp-green);
+        }
+      }
+    }
+  }
+}

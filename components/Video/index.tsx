@@ -8,14 +8,14 @@ import { FaRegDizzy, FaRegSurprise } from "react-icons/fa";
 import { MdOutlineSentimentNeutral } from "react-icons/md";
 
 import { Context } from "../../context";
-import { useFaceDetection } from "../../hooks/useFaceDetection";
+import { useCamDetection } from "../../hooks/useCamDetection";
 
 import Button from "../Button";
 import { Tooltips } from "../Tooltip";
 
 import styles from "./Video.module.scss";
 
-export default function Video() {
+export default function VideoComponent() {
   const {
     detect,
     videoRef,
@@ -23,7 +23,7 @@ export default function Video() {
     loadModels,
     startVideo,
     faceExpression,
-  } = useFaceDetection();
+  } = useCamDetection();
 
   const { handleLoading } = useContext(Context);
 
@@ -51,6 +51,15 @@ export default function Video() {
     }
 
     if (isVideoOn && videoRef.current) {
+      videoRef.current.pause();
+
+      const stream = videoRef.current.srcObject as MediaStream;
+      const tracks = stream.getTracks();
+
+      tracks.forEach((track) => {
+        track.stop();
+      });
+
       videoRef.current.srcObject = null;
     }
   }, [handleLoading, isVideoOn, startVideo, videoRef]);
@@ -87,19 +96,21 @@ export default function Video() {
           {!isVideoOn && (
             <h3
               style={{
+                padding: isVideoOn ? "0" : "2rem",
                 position: "absolute",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 flexDirection: "column",
                 color: "var(--gray-100)",
+                maxWidth: "400px",
                 gap: "1rem",
                 textAlign: "center",
               }}
             >
               <FiCameraOff size={50} />
-              Ative sua câmera para começar a usar
-              <br /> a ferramenta de reconhecimento
+              Ative sua câmera para começar a usar a ferramenta de
+              reconhecimento
               <p
                 style={{
                   display: "flex",
@@ -121,7 +132,7 @@ export default function Video() {
             muted
             autoPlay
             width={900}
-            height={700}
+            height={775}
             ref={videoRef}
             onPlay={detect}
             className={styles.video}
@@ -141,7 +152,9 @@ export default function Video() {
           </Tooltips>
           <Tooltips title={"Acurácia"} placement="top">
             <h3 className={styles.acuracy}>
-              {faceExpression?.value.toFixed(2) || 0}%
+              {(faceExpression && (faceExpression?.value * 100).toFixed(2)) ||
+                0}
+              %
             </h3>
           </Tooltips>
           <h3 className={styles.emoji}>
