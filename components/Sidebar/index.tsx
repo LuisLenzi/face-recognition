@@ -63,6 +63,7 @@ export default function Sidebar() {
             alt="Face Recognition Logo"
             width={125}
             height={50}
+            className={styles.longLogo}
           />
         ) : (
           <Image
@@ -70,6 +71,7 @@ export default function Sidebar() {
             alt="Short Face Recognition Logo"
             width={50}
             height={50}
+            className={styles.shortLogo}
           />
         )}
       </div>

@@ -196,7 +196,7 @@ export default function ImageComponent() {
             Who{"'"}s that pokemon?
           </Button>
         ) : (
-          <Button name="detect-button" type="button" onClick={clearCanvas}>
+          <Button name="clear-button" type="button" onClick={clearCanvas}>
             Limpar detecção
           </Button>
         )}

@@ -22,7 +22,10 @@
   .sidebarLogo {
     display: flex;
     align-items: center;
-    justify-content: center;
+
+    @media (max-width: 475px) {
+      display: none;
+    }
   }
 
   .buttons {
